@@ -428,28 +428,20 @@
 		</footer>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-		<script src="./app.js">
+		<script>
 			let surveyAnswers = [];
 			$('#submit').click((e)=> {
 				e.preventDefault()
-
 				for (let i = 1; i < 41; i++) {
 					let id = '#question' + i;
 					let questionScore = $(id).val();
 					surveyAnswers.push(questionScore);
-
 				}
 				console.log(surveyAnswers)
-
-			$.post("/api/tables", surveyAnswers,
-		        (data)=> {
-		          if (data) {
-		            alert("Yay! You are officially booked!");
-		          }
-		          else {
-		            alert("Sorry you are on the wait list");
-		          }
-		      });
+			$.post("/survey/submit", surveyAnswers,
+		(data)=> {
+			console.log(data)
+		});
 			});
 		</script>
 	</body>
