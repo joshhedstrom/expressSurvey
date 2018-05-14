@@ -13,8 +13,8 @@ module.exports = (app)=> {
     // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
     // ---------------------------------------------------------------------------
 
-    app.get("/api/tables", function(req, res) {
-        res.json(tableData);
+    app.get("/survey", function(req, res) {
+        res.json(answers);
     });
 
     app.get("/api/waitlist", function(req, res) {
