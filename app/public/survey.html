@@ -422,70 +422,94 @@
 				<i class="material-icons right">send</i>
 				</button>
 			</div>
-		</main>
-		<footer class="yellow center-align">
-			<p>Copyright Josh Hedstrom 2018</p>
-		</footer>
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-		<script>
-			let surveyAnswers = [];
-			$('#submit').click((e)=> {
-				e.preventDefault()
-				let answerObject = {
-					1: '',
-					2: '',
-					3: '',
-					4: '',
-					5: '',
-					6: '',
-					7: '',
-					8: '',
-					9: '',
-					10: '',
-					11: '',
-					12: '',
-					13: '',
-					14: '',
-					15: '',
-					16: '',
-					17: '',
-					18: '',
-					19: '',
-					20: '',
-					21: '',
-					22: '',
-					23: '',
-					24: '',
-					25: '',
-					26: '',
-					27: '',
-					28: '',
-					29: '',
-					30: '',
-					31: '',
-					32: '',
-					33: '',
-					34: '',
-					35: '',
-					36: '',
-					37: '',
-					38: '',
-					39: '',
-					40: ''
-				}
+			<div id="end-modal" class="modal">
+				<div class="modal-content">
+					<h4>Your Results</h4>
+					<p>You scored:</p>
+					<p id="otter"></p>
+					<p id="beaver"></p>
+					<p id="lion"></p>
+					<p id="retriever"></p>
+					<h5>Thanks for using the survey!</h5>
+				</div>
+				<div class="modal-footer">
+					<a href="/" class="modal-close waves-effect waves-green btn-flat">Done</a>
+					</div>
+				</div>
+			</main>
+			<footer class="yellow center-align">
+				<p>Copyright Josh Hedstrom 2018</p>
+			</footer>
+			<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+			<script>
+				let surveyAnswers = [];
+				$('#submit').click((e)=> {
+					e.preventDefault()
+					let answerObject = {
+						1: '',
+						2: '',
+						3: '',
+						4: '',
+						5: '',
+						6: '',
+						7: '',
+						8: '',
+						9: '',
+						10: '',
+						11: '',
+						12: '',
+						13: '',
+						14: '',
+						15: '',
+						16: '',
+						17: '',
+						18: '',
+						19: '',
+						20: '',
+						21: '',
+						22: '',
+						23: '',
+						24: '',
+						25: '',
+						26: '',
+						27: '',
+						28: '',
+						29: '',
+						30: '',
+						31: '',
+						32: '',
+						33: '',
+						34: '',
+						35: '',
+						36: '',
+						37: '',
+						38: '',
+						39: '',
+						40: ''
+					}
+					for (let i = 1; i < 41; i++) {
+						let id = '#question' + i;
+						let questionScore = parseInt($(id).val());
+						answerObject[i] = questionScore;
+					}
+				$.post("/survey/submit", answerObject,
+			(data)=> {
+				let otter = Math.round(data.otterPercent * 100);
+				let beaver = Math.round(data.beaverPercent * 100);
+				let lion = Math.round(data.lionPercent * 100);
+				let retriever = Math.round(data.retrieverPercent * 100);
 
-				for (let i = 1; i < 41; i++) {
-					let id = '#question' + i;
-					let questionScore = parseInt($(id).val());
-					answerObject[i] = questionScore;
-				}
+				$('#otter').text(`Otter: ${otter}`)
+				$('#beaver').text(`Beaver: ${beaver}`)
+				$('#lion').text(`Lion: ${lion}`)
+				$('#retriever').text(`Golden Retriever: ${retriever}`)
 
-			$.post("/survey/submit", answerObject,
-		(data)=> {
-			console.log('data: ', data)
-		});
+				$('.modal').modal();
+				$('#end-modal').modal('open');
+				console.log(`otter: ${otter} || beaver: ${beaver} || lion: ${lion} || retriever: ${retriever}`)
 			});
-		</script>
-	</body>
-</html>
+				});
+			</script>
+		</body>
+	</html>
