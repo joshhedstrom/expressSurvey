@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -47,28 +47,28 @@
 
 				const questions = ['Likes Authority', 'Enthusiastic', 'Sensitive Feelings', 'Likes Instructions', 'Taking Charge', 'Taking Risks', 'Loyal', 'Accurate', 'Determined', 'Visionary', 'Calm', 'Consistent', 'Tries New Ideas', 'Likes to Talk', 'Enjoys Schedules', 'Predictable', 'Competitive', 'Shares Ideas', 'Dislikes Change', 'Practical', 'Problem Solver', 'Enjoys Popularity', 'Gives in to Others', 'Factual', 'Productive', 'Fun-loving', 'Avoids Confrontations', 'Responsible', 'Bold', 'Likes Variety', 'Sensitive', 'Prefers Perfection', 'Decision Maker', 'Spontaneous', 'Nurturing', 'Detail Oriented', 'Persistent', 'Inspirational', 'Peace Maker', ' Logical'];
 
-				for (var i = 0; i < questions.length; i++) {
+				questions.forEach((elem, i)=>{
+
 					let id = `question${i + 1}`
 					let quality = questions[i]
 
-				let question = $('<div>').html(
-					`<div class="row hoverable">
-						<form class="center-align ">
-							<h4 class="center-align col s12">${quality}</h4>
-							<p class="col s1 m3 right-align">1</p>
-							<p class="range-field col s10 m6 center-align">
-								<input class="" type="range" id="${id}" min="0" max="10"/>
-							</p>
-							<p class="col s1 m3 left-align">10</p>
-						</form>
-					</div>`
-				);
-
-				$('#questions').append(question)
-				}
+					let question = $('<div>').html(
+						`<div class="row hoverable">
+							<form class="center-align ">
+								<h4 class="center-align col s12">${quality}</h4>
+								<p class="col s1 m3 right-align">1</p>
+								<p class="range-field col s10 m6 center-align">
+									<input class="" type="range" id="${id}" min="0" max="10"/>
+								</p>
+								<p class="col s1 m3 left-align">10</p>
+							</form>
+						</div>`
+					);
+					$('#questions').append(question)
+				})
 
 				let surveyAnswers = [];
-				$('#submit').click((e)=> {
+				$('#submit').click(e => {
 					e.preventDefault()
 					let answerObject = {
 						1: '',
@@ -118,21 +118,21 @@
 						answerObject[i] = questionScore;
 					}
 				$.post("/survey/submit", answerObject,
-			(data)=> {
-				let otter = Math.round(data.otterPercent * 100);
-				let beaver = Math.round(data.beaverPercent * 100);
-				let lion = Math.round(data.lionPercent * 100);
-				let retriever = Math.round(data.retrieverPercent * 100);
+					(data)=> {
+						let otter = Math.round(data.otterPercent * 100);
+						let beaver = Math.round(data.beaverPercent * 100);
+						let lion = Math.round(data.lionPercent * 100);
+						let retriever = Math.round(data.retrieverPercent * 100);
 
-				$('#otter').text(`Otter: ${otter}`)
-				$('#beaver').text(`Beaver: ${beaver}`)
-				$('#lion').text(`Lion: ${lion}`)
-				$('#retriever').text(`Golden Retriever: ${retriever}`)
+						$('#otter').text(`Otter: ${otter}`);
+						$('#beaver').text(`Beaver: ${beaver}`);
+						$('#lion').text(`Lion: ${lion}`);
+						$('#retriever').text(`Golden Retriever: ${retriever}`);
 
-				$('.modal').modal();
-				$('#end-modal').modal('open');
-				console.log(`otter: ${otter} || beaver: ${beaver} || lion: ${lion} || retriever: ${retriever}`)
-			});
+						$('.modal').modal();
+						$('#end-modal').modal('open');
+						console.log(`otter: ${otter} || beaver: ${beaver} || lion: ${lion} || retriever: ${retriever}`);
+					});
 				});
 			</script>
 		</body>

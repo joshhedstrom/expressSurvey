@@ -1,13 +1,8 @@
-// const lionPersonality = [10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0];
-// const otterPersonality = [0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0];
-// const retrieverPersonality = [0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0];
-// const beaverPersonality = [0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10];
+module.exports = function testLoop(answerObject) {
 
-module.exports = function testLoop(object) {
-
-    let array = [];
+    let answerArray = [];
     for (let i = 1; i < 41; i++) {
-        array.push(parseInt(object[i]))
+        answerArray.push(parseInt(answerObject[i]))
     }
 
     let lionScore = 0;
@@ -20,24 +15,25 @@ module.exports = function testLoop(object) {
     let retrieverPercent;
     let beaverPercent;
 
-    for (let i = 0; i < array.length; i++) {
+    answerArray.forEach((elem, i) => {
+
         let placeholder = i % 4
 
         switch (placeholder) {
             case 0:
-                lionScore += array[i];
+                lionScore += answerArray[i];
                 break;
             case 1:
-                otterScore += array[i];
+                otterScore += answerArray[i];
                 break;
             case 2:
-                retrieverScore += array[i];
+                retrieverScore += answerArray[i];
                 break;
             case 3:
-                beaverScore += array[i];
+                beaverScore += answerArray[i];
                 break;
         }
-    }
+    })
 
     function analyzeResults() {
         let total = otterScore + beaverScore + lionScore + retrieverScore;
